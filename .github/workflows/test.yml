@@ -1,0 +1,17 @@
+name: Source G-A
+
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: print a greeting
+        run: echo "Hi this is biswadip"
+
+      - name: Show the current server time
+        run: date
+
+      - name: Show the current user name
+        run: $USER
