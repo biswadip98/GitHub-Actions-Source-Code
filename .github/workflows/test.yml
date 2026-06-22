@@ -14,4 +14,4 @@ jobs:
         run: date
 
       - name: Show the current user name
-        run: $USER
+        run: echo $USER
