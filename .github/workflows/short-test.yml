@@ -31,4 +31,12 @@ jobs:
     steps:
       - name: Final update
         run: echo "Here is the final update"
-       
+
+  Code-checking:
+    runs-on: ubuntu-latest
+    needs: Final-status
+    steps:
+      - name: check the node.js code
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
