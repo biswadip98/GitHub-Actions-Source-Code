@@ -1,0 +1,34 @@
+name: Public-Repo
+on: workflow_dispatch
+
+jobs:
+  required-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: final-statement
+        run: echo "Hi, this is the first step"
+
+      - name: step-finalize
+        run: echo "This is the step for final statement"
+        
+  Status-update:
+   runs-on: ubuntu-latest
+   needs: required-update
+   steps:
+     - name: Updating Status
+       run: echo "Here is the updated status of the projects"
+
+  Updated-status:
+    runs-on: ubuntu-latest
+    needs: Status-update
+    steps:
+      - name: Updated status is here
+        run: echo "You can find the updated status here"
+
+  Final-status:
+    runs-on: ubuntu-latest
+    needs: Updated-status
+    steps:
+      - name: Final update
+        run: echo "Here is the final update"
+       
