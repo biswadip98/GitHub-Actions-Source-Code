@@ -1,5 +1,5 @@
 name: Public-Repo
-on: workflow_dispatch
+on: push
 
 jobs:
   required-update:
@@ -20,14 +20,14 @@ jobs:
 
   Updated-status:
     runs-on: ubuntu-latest
-    needs: Status-update
+    needs: Final-status
     steps:
       - name: Updated status is here
         run: echo "You can find the updated status here"
 
   Final-status:
     runs-on: ubuntu-latest
-    needs: Updated-status
+    needs: Status-update
     steps:
       - name: Final update
         run: echo "Here is the final update"
