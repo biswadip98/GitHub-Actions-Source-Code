@@ -2,7 +2,7 @@ name: Public-Repo
 on: workflow_dispatch
 
 jobs:
-  required-update:
+  Code:
     runs-on: ubuntu-latest
     steps:
       - name: final-statement
@@ -11,32 +11,44 @@ jobs:
       - name: step-finalize
         run: echo "This is the step for final statement"
         
-  Status-update:
+  Build:
    runs-on: ubuntu-latest
-   needs: required-update
+   needs: Code
    steps:
      - name: Updating Status
        run: echo "Here is the updated status of the projects"
 
-  Updated-status:
+  Test:
     runs-on: ubuntu-latest
-    needs: Final-status
+    needs: Build
     steps:
       - name: Updated status is here
         run: echo "You can find the updated status here"
 
-  Final-status:
+  Deploy:
     runs-on: ubuntu-latest
-    needs: Status-update
+    needs: Test
     steps:
       - name: Final update
         run: echo "Here is the final update"
 
-  Code-checking:
+  Monitor:
     runs-on: ubuntu-latest
-    needs: Final-status
+    needs: Deploy
     steps:
       - name: check the node.js code
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+  Live:
+    runs-on: ubuntu-latest
+    needs: Monitor
+    steps:
+      - name: Latest update of the deployments
+        run: echo "Change the commit and you will get the final update"
+
+      - name: Current Status
+        run: echo "Current status is-----Current Status------"
+
+        
