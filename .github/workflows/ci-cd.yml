@@ -1,0 +1,38 @@
+name: Pipeline
+on:
+  push:
+    branches: [main]
+
+jobs:
+  code-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull the code
+        run: .actions/checout@v7
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20' # Specify your project's Node version
+          cache: 'npm'       # Automatically caches npm dependencies
+
+      - name: Install Dependencies
+        run: npm ci         # Clean install for predictable CI environments
+
+      - name: Run Linter
+        run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    needs: code-test
+    steps:
+      - name: build the code
+        run: npm install
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: deply the app
+        run: echo "Deployed successfully"
+     
